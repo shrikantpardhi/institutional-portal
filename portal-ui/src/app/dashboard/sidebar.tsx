@@ -1,71 +1,27 @@
-import React from 'react'
+import React from "react";
+import { menus } from "../models/menus";
+import Link from "next/link";
 
 const SideBar = () => {
+  const role = ["ADMIN"];
   return (
-    <div className="">
-      <div className="drawer absolute bottom-0 left-0 top-24 drop-shadow-md w-1/5 lg:w-1/5 md:w-1/6">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-side">
-          <ul className="menu bg-base-200 w-full min-h-screen">
-            <li>
-              <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
+    <div className="drawer absolute bottom-0 left-0 top-20 h-full w-1/5 drop-shadow-md md:w-1/6 lg:w-1/5">
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-side">
+        <ul className="menu  h-full w-full divide-y divide-solid divide-slate-300 bg-base-200 p-0 [&_li>*]:rounded-none">
+          {menus.map((menu) => {
+            if (role.includes(menu.role)) {
+              return (
+                <li className="leading-loose" key={menu.title}>
+                  <Link href={menu.link}>{menu.title}</Link>
+                </li>
+              );
+            }
+          })}
+        </ul>
       </div>
     </div>
   );
-}
+};
 
-export default SideBar
+export default SideBar;
